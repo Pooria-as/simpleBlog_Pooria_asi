@@ -82,6 +82,13 @@
 
             @auth
             <div class="container">
+
+
+                @include("layouts.success")
+
+
+
+
                 <div class="div row">
                     <div class="col-md-4">
                         <ui class="list-group">
