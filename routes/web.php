@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 
-
+Route::resource('category', "CategoryController");
 
 Auth::routes();
 
