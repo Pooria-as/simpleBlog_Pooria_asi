@@ -93,12 +93,12 @@
                     <div class="col-md-4">
                         <ui class="list-group">
                             <li class="list-group-item">
-                                <a href="">
+                                <a href="{{route("posts.index")}}">
                                     Post
                                 </a>
                             </li>
                             <li class="list-group-item">
-                                <a href="">
+                                <a href="{{route("category.index")}}">
                                     Category
                                 </a>
                             </li>
@@ -119,5 +119,8 @@
 
         </main>
     </div>
+
+
+    @yield("script")
 </body>
 </html>

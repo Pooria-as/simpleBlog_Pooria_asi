@@ -26,6 +26,7 @@
                 <th>
                     Name
                 </th>
+                <th></th>
              </tr>
            </thead>
            <tbody>
@@ -42,6 +43,15 @@
                       <td>
                           {{$category->name}}
                       </td>
+                      <td>
+                          <a href="{{route("category.edit",$category->id)}}" class="btn btn-primary btn-sm">
+                            Edit
+                        </a>
+                      
+                        <button class="btn btn-danger btn-sm" onclick="handleDelete({{$category->id}})">
+                            Delete
+                        </button>
+                      </td>
                   </tr>
               @endforeach
            </tbody>
@@ -49,5 +59,53 @@
     </div>
 </div>
 
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form action="{{route("category.destroy",$category->id)}}" method="POST" id="DeleteForm">
+        @csrf
+        @method("DELETE")
+
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="DeleteModalLabel">Delete Category</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h6>
+                  Are you sure to delete Category?
+              </h6>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No Thanks</button>
+              <button  class="btn btn-danger"  type="submit">Delete</button>
+            </div>
+          </div>
+
+      </form>
+
+    </div>
+  </div>
+
+
+@endsection
+
+
+@section("script")
+
+<script>
+    function handleDelete(id)
+    {
+    //    var form=document.getElementById("DeleteForm");
+    //    form.action='/category' + id;
+
+        $("#DeleteModal").modal("show");
+
+    }
+</script>
 
 @endsection
