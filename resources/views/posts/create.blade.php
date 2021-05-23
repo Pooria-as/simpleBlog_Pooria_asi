@@ -27,13 +27,14 @@
 
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea name="content" id="content" cols="10" rows="10" class="form-control"></textarea>
+            <input id="content" type="hidden" name="content">
+            <trix-editor input="content"></trix-editor>
         </div>
     
 
         <div class="form-group">
             <lable for="published_at">Published At</lable>
-            <input type="date" name="published_at" id="published_at" class="form-control">
+            <input type="text" name="published_at" id="published_at" class="form-control">
         </div>
 
         <div class="form-group">
@@ -48,11 +49,28 @@
 
 
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.3/flatpickr.min.js"></script>
+
+<script>
+
+flatpickr("#published_at", {
+   
+enableTime : true
+}
+);
 
 
+</script>
 
 
 
 
 
 @endsection
+
+
+
+
+
+
