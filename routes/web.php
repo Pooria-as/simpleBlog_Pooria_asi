@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::resource('category', "CategoryController")->middleware("auth");
 Route::resource('posts', "PostController")->middleware("auth");
 Route::get("trash-post","PostController@trash")->name("trash-post");
+Route::put("trash-post/{id}/restore","PostController@restore")->name("restore-post");
 
 
 Auth::routes();

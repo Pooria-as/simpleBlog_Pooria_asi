@@ -7,8 +7,8 @@ New Post</a>
 
 <div class="card">
     <div class="card-header">
-       Post
-        
+     
+     Posts  
     </div>
     <div class="card-body">
       @if($Posts->count() > 0)
@@ -59,18 +59,32 @@ New Post</a>
                     <td>
                         @if(!$post->trashed())
                         <a href="{{route("posts.edit",$post->id)}}" class="btn btn-primary">edit</a>
-
-                        @else
-
-                        @endif
+                        
                         <form action="{{route("posts.destroy",$post->id)}}" method="POST">
-                        @csrf
-                        @method("DELETE")
-                            <button class="btn btn-danger" type="submit">
-                               {{$post->trashed() ? "Delete" : "Trash"}}
-
-                            </button>
+                            @csrf
+                            @method("DELETE")
+                                <button class="btn btn-danger" type="submit">
+                                   Trash
+    
+                                </button>
+                            </form>
+                        @else
+                        <form action="{{route("restore-post",$post->id)}}" method="POST">
+                        @method("PUT")
+                        {{ csrf_field() }}
+                        <button class="btn btn-primary" type="submit">Restore</button>
                         </form>
+                        
+                        <form action="{{route("posts.destroy",$post->id)}}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                                <button class="btn btn-danger" type="submit">
+                                 
+                                    Delete
+    
+                                </button>
+                            </form>
+                            @endif
                     </td>
                 </tr>
             @endforeach
