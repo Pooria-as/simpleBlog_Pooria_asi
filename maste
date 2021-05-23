@@ -1,0 +1,29 @@
+[33mcommit c11a4c7ea90a09e220632418aa0ba2d152f88141[m[33m ([m[1;36mHEAD -> [m[1;32mpooria[m[33m)[m
+Author: Pooria <p.asiabi@gmail.com>
+Date:   Sat May 22 02:27:34 2021 -0700
+
+    create post controller and do somthing for methods
+
+[33mcommit 02953718357d176a8d456ae982fa81f2f0610b69[m
+Author: Pooria <p.asiabi@gmail.com>
+Date:   Fri May 21 11:02:17 2021 -0700
+
+    store and show categories
+
+[33mcommit 9c5a55512bc6a719ec6028f32724aa03ce802bdd[m
+Author: Pooria <p.asiabi@gmail.com>
+Date:   Fri May 21 06:44:43 2021 -0700
+
+    create controller for category and views
+
+[33mcommit e3d2ddc0f465f90d6858acf85b1ace420f73e6a3[m
+Author: Pooria <p.asiabi@gmail.com>
+Date:   Fri May 21 06:23:20 2021 -0700
+
+    add post and category model and migration
+
+[33mcommit 4115d717254c7630e0d835aeb733dc814787c1b3[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Pooria <p.asiabi@gmail.com>
+Date:   Fri May 21 06:15:16 2021 -0700
+
+    start project

@@ -103,6 +103,19 @@
                                 </a>
                             </li>
                         </ui>
+
+
+
+
+                        <ui class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{route("trash-post")}}">
+                                    TrashedList
+                                </a>
+                            </li>
+                          
+                        </ui>
+
                     </div>
                     <div class="col-md-8">
                         @yield('content')

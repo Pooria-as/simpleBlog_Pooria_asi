@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class PostController extends Controller
+class TrashedPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $Posts=Post::all();
-        return view("posts.index")->with("Posts",$Posts);
+        $Posts=Post::withTrashed()->get();
+        return view("postTrashed.index",compact("Posts"));
     }
 
     /**
@@ -25,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("posts.create");
+        //
     }
 
     /**
@@ -36,24 +37,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-    
-        //uploading file or image
-       $image=$request->image->store("post");
-       //create post
-
-        Post::create([
-            "title"=>$request->title,
-            "description"=>$request->description,
-            "content"=>$request->content,
-            "image"=>$image,
-            "published_at"=>$request->published_at
-        ]);
-
-
-            session()->flash("success","Post Created Successfully");
-
-
-            return redirect(route("posts.index"));
+        //
     }
 
     /**
@@ -96,33 +80,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
+
     {
+   $post->forceDelete();
 
-        $post=Post::withTrashed()->where("id",$id)->firstOrFail();
-        if($post->trashed())
-        {
-            $post->forceDelete();
-        }
-        else{
-            $post->delete();
-
-        }
-
-        session()->flash("success","Post Deleted Successfully");
-  
-        return redirect(route("posts.index"));
+return back();
+        
     }
-
-
-
-    public function trash()
-    {
-        $trashed=Post::withTrashed()->get();
-
-        return view("posts.index")->with("Posts",$trashed);
-    }
-
-
- 
 }

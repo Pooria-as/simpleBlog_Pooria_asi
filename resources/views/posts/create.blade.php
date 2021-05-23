@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        Create Post
+     Posts
     </div>
     <div class="card-body">
         <form action="{{route("posts.store")}}" method="POST" enctype="multipart/form-data">
@@ -23,7 +23,7 @@
             <label for="image">Image</label>
             <input type="file" class="form-control" name="image" id="image">
         </div>
-    
+    @csrf
 
         <div class="form-group">
             <label for="content">Content</label>
@@ -39,26 +39,6 @@
         <div class="form-group">
             <button class="btn btn-success btn-block">  Create    </button>
         </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     </form>
     </div>
 </div>

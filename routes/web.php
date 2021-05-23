@@ -19,8 +19,10 @@ Route::get('/', function () {
 });
 
 
-Route::resource('category', "CategoryController");
-Route::resource('posts', "PostController");
+Route::resource('category', "CategoryController")->middleware("auth");
+Route::resource('posts', "PostController")->middleware("auth");
+Route::get("trash-post","PostController@trash")->name("trash-post");
+
 
 Auth::routes();
 
