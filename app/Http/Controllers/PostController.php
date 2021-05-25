@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,7 +69,8 @@ class PostController extends Controller
             "content"=>$request->content,
             "image"=>$image,
             "published_at"=>$request->published_at,
-            "category_id"=>$request->category
+            "category_id"=>$request->category,
+            "user_id"=>Auth::user()->id
         ]);
         
 

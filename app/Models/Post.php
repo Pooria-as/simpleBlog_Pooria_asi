@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
 
-   protected $fillable=['title',"description","content","image","published_at","category_id"];
+   protected $fillable=['title',"description","content","image","published_at","category_id","user_id"];
 
    
    use SoftDeletes;
@@ -40,6 +40,14 @@ public function hasTag($tag_id)
 return in_array($tag_id,$this->tags->pluck('id')->toArray());
 }
 
+public function user()
+{
+   return $this->belongsTo(User::class);
+}
+public function comments()
+{
+   return $this->hasMany(Comment::class);
+}
 
 
 }
