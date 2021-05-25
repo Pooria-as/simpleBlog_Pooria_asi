@@ -20,10 +20,17 @@ Route::get('/', function () {
 
 
 Route::resource('category', "CategoryController")->middleware("auth");
+Route::resource('tag', "TagController")->middleware("auth");
 Route::resource('posts', "PostController")->middleware("auth");
 Route::get("trash-post","PostController@trash")->name("trash-post");
 Route::put("trash-post/{id}/restore","PostController@restore")->name("restore-post");
 
+
+
+Route::get("users","UserController@index")->name("users.index")->middleware(['auth','IsAdmin']);
+Route::put("users/{id}/Make-Admin","UserController@MakeAdmin")->name("makeAdmin")->middleware(['auth','IsAdmin']);
+Route::get("User/Profile","UserController@Profile")->name("profile")->middleware(['IsAdmin','auth']);
+Route::put("User/Profile/update","UserController@updateProfile")->name("Updateprofile")->middleware(['IsAdmin','auth']);
 
 Auth::routes();
 

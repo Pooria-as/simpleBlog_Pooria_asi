@@ -5,12 +5,12 @@
 
 
 <div class="d-fles justify-content-end mb-2">
-    <a href="{{route("category.create")}}" class="btn btn-success">Add Category</a>
+    <a href="{{route("tag.create")}}" class="btn btn-success">Add Tag</a>
 </div>
 <div class="card">
     <div class="card-header">
         <h6>
-            All Categories
+            All tags
         </h6>
 
         @include("Partialviews.error")
@@ -21,7 +21,7 @@
       
     </div>
     <div class="card-body">
-      @if($categories->count() > 0)
+      @if($tags->count() > 0)
       <table class="table table-striped table-condensed table-bordered">
         <thead>
           <tr>
@@ -39,7 +39,7 @@
             @php
                 $id=1;
             @endphp
-           @foreach ($categories as $category)
+           @foreach ($tags as $tag)
                <tr>
                    <td>
                      @php
@@ -47,37 +47,37 @@
                      @endphp
                    </td>
                    <td>
-                       {{$category->name}}
+                       {{$tag->name}}
                    </td>
                    <td>
-                     {{$category->posts->count()}}
+                    {{$tag->posts->count()}}
                    </td>
                    <td>
-                       <a href="{{route("category.edit",$category->id)}}" class="btn btn-primary btn-sm">
+                       <a href="{{route("tag.edit",$tag->id)}}" class="btn btn-primary btn-sm">
                          Edit
                      </a>
                    
-                     <button class="btn btn-danger btn-sm" onclick="handleDelete({{$category->id}})">
+                     <button class="btn btn-danger btn-sm" onclick="handleDelete({{$tag->id}})">
                          Delete
                      </button>
                    </td>
                </tr>
                <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel" aria-hidden="true">
                  <div class="modal-dialog" role="document">
-                   <form action="{{route("category.destroy",$category->id)}}" method="POST" id="DeleteForm">
+                   <form action="{{route("tag.destroy",$tag->id)}}" method="POST" id="DeleteForm">
                      @csrf
                      @method("DELETE")
              
                      <div class="modal-content">
                          <div class="modal-header">
-                           <h5 class="modal-title" id="DeleteModalLabel">Delete Category</h5>
+                           <h5 class="modal-title" id="DeleteModalLabel">Delete Tag</h5>
                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                              <span aria-hidden="true">&times;</span>
                            </button>
                          </div>
                          <div class="modal-body">
                            <h6>
-                               Are you sure to delete Category?
+                               Are you sure to delete Tag?
                            </h6>
                          </div>
                          <div class="modal-footer">
@@ -114,7 +114,7 @@
     function handleDelete(id)
     {
     //    var form=document.getElementById("DeleteForm");
-    //    form.action='/category' + id;
+    //    form.action='/Tag' + id;
 
         $("#DeleteModal").modal("show");
 

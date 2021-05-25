@@ -53,6 +53,53 @@ Post
         </div>
     
 
+
+
+<div class="form-group">
+    <label for="category">category</label>
+
+    <select name="category" id="category" class="form-control">
+        @foreach ($categories as $category)
+                <option value="{{$category->id}}"
+                    @if(isset($post))
+                    @if($category->id == $post->category_id)
+                    selected
+
+                    @endif
+
+
+                    @endif
+                    >
+                    {{$category->name}}
+                </option>
+        @endforeach 
+    </select>
+</div>
+
+
+
+<div class="form-group">
+    <label for="tag">tag</label>
+    <select name="tags[]" id="tag" class="form-control tag-selector" multiple>
+        @foreach ($tags as $tag)
+                 <option value="{{$tag->id}}"
+                    @if(isset($post))
+                    @if ($post->hasTag($tag->id))
+                        selected
+                    @endif
+                    @endif
+                    
+                    >
+                {{$tag->name}}
+                    </option>
+        @endforeach 
+    </select>
+</div>
+
+
+
+
+
         <div class="form-group">
             <lable for="published_at">Published At</lable>
             <input type="text" name="published_at" id="published_at" class="form-control" value="{{isset($post) ? $post->published_at : "" }}">
@@ -76,12 +123,17 @@ Post
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.3/flatpickr.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.3/flatpickr.min.js"></script>
 <script>
 
 flatpickr("#published_at", {enableTime : true}
 );
+
+
+$(document).ready(function() {
+    $('.tag-selector').select2();
+});
 
 </script>
 

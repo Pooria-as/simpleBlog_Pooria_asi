@@ -2,12 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+
+
+
+
+    public function __construct()
+    {
+        return $this->middleware("checkCategory")->only("create");
+    }
+
+
+
+
+
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +46,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("posts.create");
+        return view("posts.create")->with("categories",Category::all())->with("tags",Tag::all());
     }
 
     /**
@@ -37,18 +57,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-    
         //uploading file or image
        $image=$request->image->store("post");
        //create post
+       
 
-        Post::create([
+      $post=  Post::create([
             "title"=>$request->title,
             "description"=>$request->description,
             "content"=>$request->content,
             "image"=>$image,
-            "published_at"=>$request->published_at
+            "published_at"=>$request->published_at,
+            "category_id"=>$request->category
         ]);
+        
+
+        if($post->tags)
+        {
+            $post->tags()->attach($request->tags);
+        }
 
 
             session()->flash("success","Post Created Successfully");
@@ -76,7 +103,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view("posts.create",compact("post"));
+        $categories=DB::table('categories')->get();
+        $tags=DB::table('tags')->get();
+        return view("posts.create",compact("post","categories","tags"));
     }
 
     /**
@@ -90,20 +119,23 @@ class PostController extends Controller
     {
         //uploading new image
 
+        $data=$request->only(["title","content","description","published_at"]);
+
        if($request->hasFile("image"))
           {
-             $img= $request->image->store("post");
+             $image= $request->image->store("post");
                 //deleting old image
                $post->deletImage();
+
+               $data["image"]=$image;
           }
         //update post
-          $post->update([
-            "title"=>$request->title,
-            "description"=>$request->description,
-            "content"=>$request->content,
-            "image"=>$img,
-            "published_at"=>$request->published_at
-          ]);
+        $post->update($data);
+
+        if($request->tags)
+        {
+            $post->tags()->sync($request->tags);
+        }
         //message
         session()->flash("success","Post updated Successfully");
         //redirecting

@@ -25,7 +25,7 @@ New Post</a>
                     image
                 </th>
                 <th>
-                    description
+                    category
                 </th>
                 <th>
                     created_at
@@ -51,7 +51,10 @@ New Post</a>
                         <img src="/storage/{{$post->image}}" class="img" width="50" alt="">
                     </td>
                     <td>
-                        {{$post->description}}
+                        <a href="{{route("category.edit",$post->id)}}" > {{
+
+                            $post->category->name
+                        }}</a>
                     </td>
                     <td>
                         {{$post->created_at}}

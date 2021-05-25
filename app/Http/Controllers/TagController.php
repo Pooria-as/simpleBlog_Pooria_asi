@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoryRequest;
-use App\Models\Category;
+use App\Http\Requests\TagRequest;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
     // public function __construct()
     // {
-    //     return $this->middleware("checkCategory")->only("create","index");
+    //     return $this->middleware("checkTag")->only("create","index");
     // }
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view("categories.index")->with("categories",Category::all());
+        return view("tags.index")->with("tags",Tag::all());
     }
 
     /**
@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view("categories.create");
+        return view("tags.create");
 
     }
 
@@ -39,17 +39,17 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(TagRequest $request)
     {
       
 
-       Category::create(
+       Tag::create(
         ["name"=>$request->name]
        );
 
 
-       session()->flash("success","Category Added Successfully");
-       return redirect()->route("category.index");
+       session()->flash("success","Tag Added Successfully");
+       return redirect()->route("tag.index");
     }
 
     /**
@@ -69,9 +69,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Tag $tag)
     {
-        return view("categories.create")->with("category",$category);
+        return view("tags.create")->with("tag",$tag);
     }
 
     /**
@@ -81,16 +81,16 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request,Category $category)
+    public function update(TagRequest $request,Tag $tag)
     {
-        $category->update(
+        $tag->update(
             [
                 "name"=>$request->name
             ]
             );
             
-       session()->flash("success","Category Added Successfully");
-       return redirect()->route("category.index");
+       session()->flash("success","Tag Added Successfully");
+       return redirect()->route("tag.index");
     }
 
     /**
@@ -99,21 +99,18 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Tag $tag)
     {
-
-        if($category->posts->count() > 0)
+        if($tag->posts->count() > 0)
         {
-            session()->flash("success","Category can't delete because have a post");
-
-            return back();
-
+         session()->flash("success","We cant deleted this because have post");
+        return back();
         }
 
-        $category->delete();
-        session()->flash("success","Category Deleted Successfully");
-
-        return redirect()->route("category.index");
+        
+        $tag->delete();
+       
+        return redirect()->route("tag.index");
 
     }
 }
