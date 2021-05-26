@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("/","WelcomeController@index")->name("WelcomePage");
+Route::get("/Category/{category}/Related","WelcomeController@showRelatedCategoryPost")->name("RelatedCategoryPost");
+Route::get("/tag/{tag}/Related","WelcomeController@showRelatedTagPost")->name("RelatedtagPost");
+
 Route::get("/Blog/Post/{post}","Blog\PostController@index")->name("blogSinglePost");
 
 
